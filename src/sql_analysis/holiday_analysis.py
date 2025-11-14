@@ -85,6 +85,23 @@ def holiday_delay_distribution(conn):
     return df
 
 
+def holiday_delay_gap(conn):
+    """
+    Returns the difference in average delivery days between 
+    holiday and non-holiday periods.
+    """
+    query = """
+    SELECT
+        ROUND(
+            (SELECT AVG(delivery_days) FROM shipments_cleaned WHERE holiday_period = 'Yes')
+            -
+            (SELECT AVG(delivery_days) FROM shipments_cleaned WHERE holiday_period = 'No'),
+            2
+        ) AS delay_gap;
+    """
+    return pd.read_sql_query(query, conn)
+
+
 def holiday_success_rate(conn):
     """Return delivery success rate percentage by holiday period."""
     query = """
@@ -121,6 +138,25 @@ def holiday_in_transit_ratio(conn):
     """
     df = pd.read_sql_query(query, conn)
     return df
+
+
+def holiday_volume_spike(conn):
+    """
+    Percentage increase in shipment volume during holiday periods
+    compared to non-holiday periods.
+    """
+    query = """
+    SELECT
+        ROUND(
+            (
+                (SELECT COUNT(*) FROM shipments_cleaned WHERE holiday_period = 'Yes') -
+                (SELECT COUNT(*) FROM shipments_cleaned WHERE holiday_period = 'No')
+            ) * 100.0 /
+            (SELECT COUNT(*) FROM shipments_cleaned WHERE holiday_period = 'No'),
+            2
+        ) AS holiday_volume_spike_percent;
+    """
+    return pd.read_sql_query(query, conn)
 
 
 def holiday_weekly_trends(conn):

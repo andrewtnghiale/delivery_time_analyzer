@@ -79,6 +79,18 @@ def avg_delivery_days(conn):
     return round(df.iloc[0]["delivery_days_avg"])
 
 
+def avg_delay_late_shipments(conn, sla_days=4):
+    """
+    Average delivery days for shipments that exceed the SLA threshold.
+    """
+    query = f"""
+    SELECT ROUND(AVG(delivery_days), 2) AS avg_late_delivery_days
+    FROM shipments_cleaned
+    WHERE delivery_days > {sla_days};
+    """
+    return pd.read_sql_query(query, conn)
+
+
 def delay_count(conn):
     """Return the number of shipments currently marked as 'In Transit'."""
     query = """

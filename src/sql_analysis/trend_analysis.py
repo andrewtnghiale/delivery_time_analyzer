@@ -37,6 +37,38 @@ def weekly_volume(conn):
     return df
 
 
+def volume_by_day_of_week(conn):
+    """
+    Shipment volume grouped by day of week.
+    Monday = 0, Sunday = 6.
+    """
+    query = """
+    SELECT 
+        STRFTIME('%w', ship_date) AS day_of_week,
+        COUNT(*) AS shipment_volume
+    FROM shipments_cleaned
+    GROUP BY day_of_week
+    ORDER BY day_of_week;
+    """
+    return pd.read_sql_query(query, conn)
+
+
+def avg_delivery_by_day_of_week(conn):
+    """
+    Average delivery days grouped by day of week.
+    Monday = 0, Sunday = 6.
+    """
+    query = """
+    SELECT 
+        STRFTIME('%w', ship_date) AS day_of_week,
+        ROUND(AVG(delivery_days), 2) AS avg_delivery_days
+    FROM shipments_cleaned
+    GROUP BY day_of_week
+    ORDER BY day_of_week;
+    """
+    return pd.read_sql_query(query, conn)
+
+
 def weekly_avg_delivery_days(conn):
     """Return the average delivery days per destination region for each week."""
     query = """
