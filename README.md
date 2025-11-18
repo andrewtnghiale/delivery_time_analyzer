@@ -51,48 +51,92 @@ Modular and Scalable
 ## Project Structure
 
 delivery_time_analyzer/
+
 ├── data/
+
 │   ├── raw/                # Unprocessed shipment CSVs
+
 │   ├── cleaned/            # Final cleaned CSV outputs
+
 │   ├── logs/               # Audit logs for data issues
+
 │   └── sqlite/
+
 │       └── shipments.db    # SQLite database for analytics
+
 │
+
 ├── visuals/                # Generated charts / exports (PNG, PDF, etc.)
+
 │
+
 ├── data_generation/
+
 │   └── generate_mock_data.py   # Synthetic shipment dataset generator
+
 │
+
 ├── src/
+
+
 │   ├── main.py                 # Main ETL pipeline runner
+
 │
+
 │   ├── charts/
+
 │   │   ├── visualize_trends.py
+
 │   │   └── __init__.py
+
 │
+
 │   ├── cleaning/               # Data cleaning modules (Transform step)
+
 │   │   ├── load_data.py
+
 │   │   ├── ids_cleaning.py
+
 │   │   ├── date_cleaning.py
+
 │   │   ├── duration_cleaning.py
+
 │   │   ├── region_cleaning.py
+
 │   │   ├── save_data.py
+
 │   │   └── __init__.py
+
 │
+
 │   ├── database/
+
 │   │   └── load_to_sqlite.py
+
 │
+
 │   └── sql_analysis/
+
 │       ├── connections_and_overview.py
+
 │       ├── holiday_analysis.py
+
 │       ├── region_analysis.py
+
 │       ├── trend_analysis.py
+
 │       └── __init__.py
+
 │
+
 ├── tests/
+
 │
+
 ├── .gitignore
+
 ├── .gitattributes
+
 └── README.md
 
 
