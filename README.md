@@ -94,3 +94,8 @@ delivery_time_analyzer/
 ├── .gitignore
 ├── .gitattributes
 └── README.md
+
+## How to Run
+
+1. Create virtual environment
+2. Install dependencies:    
