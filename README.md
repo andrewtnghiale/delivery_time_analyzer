@@ -51,52 +51,138 @@ Modular and Scalable
 ## Project Structure
 
 delivery_time_analyzer/
+
 ├── data/
+
 │   ├── raw/                # Unprocessed shipment CSVs
+
 │   ├── cleaned/            # Final cleaned CSV outputs
+
 │   ├── logs/               # Audit logs for data issues
+
 │   └── sqlite/
+
 │       └── shipments.db    # SQLite database for analytics
+
 │
+
 ├── visuals/                # Generated charts / exports (PNG, PDF, etc.)
+
 │
+
 ├── data_generation/
+
 │   └── generate_mock_data.py   # Synthetic shipment dataset generator
+
 │
+
 ├── src/
+
+
 │   ├── main.py                 # Main ETL pipeline runner
+
 │
+
 │   ├── charts/
+
 │   │   ├── visualize_trends.py
+
 │   │   └── __init__.py
+
 │
+
 │   ├── cleaning/               # Data cleaning modules (Transform step)
+
 │   │   ├── load_data.py
+
 │   │   ├── ids_cleaning.py
+
 │   │   ├── date_cleaning.py
+
 │   │   ├── duration_cleaning.py
+
 │   │   ├── region_cleaning.py
+
 │   │   ├── save_data.py
+
 │   │   └── __init__.py
+
 │
+
 │   ├── database/
+
 │   │   └── load_to_sqlite.py
+
 │
+
 │   └── sql_analysis/
+
 │       ├── connections_and_overview.py
+
 │       ├── holiday_analysis.py
+
 │       ├── region_analysis.py
+
 │       ├── trend_analysis.py
+
 │       └── __init__.py
+
 │
+
 ├── tests/
+
 │
+
 ├── .gitignore
+
 ├── .gitattributes
+
 └── README.md
 
 
 ## How to Run
 
-1. Create virtual environment
-2. Install dependencies:    
+### 1. Create and activate a virtual environment
+
+```sh
+python -m venv venv
+.\venv\Scripts\activate      # Windows
+```
+### 2. Install dependencies
+
+```sh
+pip install -r requirements.txt
+```
+
+### 3. Generate mock shipment data
+This creates the raw file in: data/raw/shipments.csv
+```sh
+python data_generation/generate_mock_data.py
+```
+
+### 4. Run the full ETL pipeline
+This step loads raw data, cleans it, logs issues, and then outputs into a cleaned CSV.
+```sh
+python src/main.py
+```
+
+### 5. Load cleaned data into SQLite
+Creates or updates: data/sqlite/shipments.db
+```sh
+python src/database/load_to_sqlite.py
+```
+
+### 6. Run SQL analytic scripts
+Each script performs a focused analysis.
+```sh
+python src/sql_analysis/connections_and_overview.py
+python src/sql_analysis/holiday_analysis.py
+python src/sql_analysis/region_analysis.py
+python src/sql_analysis/trend_analysis.py
+```
+
+### 7. Generate visualizations (Optional)
+Outputs charts to the visuals/ folder:
+```sh
+python src/charts/visualize_trends.py
+```
