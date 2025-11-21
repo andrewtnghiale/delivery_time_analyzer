@@ -1,0 +1,17 @@
+origin_region,destination_region,shipment_volume,avg_delivery_days,MIN(delivery_days),MAX(delivery_days)
+West,South,107,3.35,1.0,8.0
+North,West,123,3.41,1.0,10.0
+South,South,135,3.47,1.0,10.0
+East,South,108,3.49,1.0,10.0
+West,West,121,3.52,1.0,10.0
+West,North,106,3.58,1.0,10.0
+East,North,128,3.66,1.0,10.0
+East,East,128,3.69,1.0,10.0
+North,East,125,3.74,1.0,10.0
+South,North,106,3.77,1.0,10.0
+North,North,95,3.78,1.0,10.0
+West,East,112,3.81,1.0,10.0
+North,South,117,3.85,1.0,10.0
+South,West,117,3.93,1.0,10.0
+South,East,117,3.94,1.0,10.0
+East,West,117,4.19,1.0,10.0

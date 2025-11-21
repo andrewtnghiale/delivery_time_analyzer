@@ -1,0 +1,6 @@
+origin_region,destination_region,avg_delivery_days
+West,South,3.35
+North,West,3.41
+South,South,3.47
+East,South,3.49
+West,West,3.52

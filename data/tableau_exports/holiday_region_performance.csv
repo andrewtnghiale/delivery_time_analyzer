@@ -1,0 +1,9 @@
+origin_region,holiday_period,shipment_count,avg_delivery_days,delivery_success_rate
+East,Yes,176,5.67,38
+East,No,374,3.02,46
+North,Yes,153,5.55,37
+North,No,378,3.07,45
+South,Yes,168,5.76,38
+South,No,387,3.01,44
+West,Yes,164,5.24,38
+West,No,352,2.91,45

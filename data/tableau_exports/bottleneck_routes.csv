@@ -1,0 +1,11 @@
+origin_region,destination_region,shipment_volume,avg_delivery_days
+South,South,155,3.47
+East,North,147,3.66
+North,East,145,3.74
+East,East,141,3.69
+West,West,141,3.52
+North,West,140,3.41
+South,East,136,3.94
+South,West,135,3.93
+North,South,135,3.85
+East,West,134,4.19
