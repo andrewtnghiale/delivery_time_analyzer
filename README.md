@@ -48,6 +48,70 @@ Modular and Scalable
 - Each cleaning and analysis process is developed as a separate module under src/, making this project modular, testable, and extensible.
 
 
+
+## How to Run
+
+### 1. Create and activate a virtual environment
+
+```sh
+python -m venv venv
+.\venv\Scripts\activate      # Windows
+```
+### 2. Install dependencies
+
+```sh
+pip install -r requirements.txt
+```
+
+### 3. Generate mock shipment data
+This creates the raw file in: data/raw/shipments.csv
+```sh
+python data_generation/generate_mock_data.py
+```
+
+### 4. Run the full ETL pipeline
+This step loads raw data, cleans it, logs issues, and then outputs into a cleaned CSV.
+```sh
+python src/main.py
+```
+
+### 5. Load cleaned data into SQLite
+Creates or updates: data/sqlite/shipments.db
+```sh
+python src/database/load_to_sqlite.py
+```
+
+### 6. Run SQL analytic scripts
+Each script performs a focused analysis.
+```sh
+python src/sql_analysis/connections_and_overview.py
+python src/sql_analysis/holiday_analysis.py
+python src/sql_analysis/region_analysis.py
+python src/sql_analysis/trend_analysis.py
+```
+
+### 7. Generate visualizations (Optional)
+Outputs charts to the visuals/ folder:
+```sh
+python src/charts/visualize_trends.py
+```
+
+## Interactive Tableau Dashboard
+This project includes an Tableau dashboard suite build from the cleaned ETL output and SQL analytics. It showcases the final stage of the pipeline, transforming processed shipment data into business insights.
+
+https://public.tableau.com/views/ShipmentsETLAnalyticswithQueries/OverallShipmentPerformance
+
+The Tableau dashboards visualize:
+
+- Overall shipment volume and delivery performance
+- Regional delivery success rates and bottleneck routes
+- Holiday vs. non-holiday delivery delays and success gaps
+- Weekly shipment trends and delivery duration patterns
+
+
+
+
+
 ## Project Structure
 
 delivery_time_analyzer/
@@ -138,51 +202,3 @@ delivery_time_analyzer/
 ├── .gitattributes
 
 └── README.md
-
-
-## How to Run
-
-### 1. Create and activate a virtual environment
-
-```sh
-python -m venv venv
-.\venv\Scripts\activate      # Windows
-```
-### 2. Install dependencies
-
-```sh
-pip install -r requirements.txt
-```
-
-### 3. Generate mock shipment data
-This creates the raw file in: data/raw/shipments.csv
-```sh
-python data_generation/generate_mock_data.py
-```
-
-### 4. Run the full ETL pipeline
-This step loads raw data, cleans it, logs issues, and then outputs into a cleaned CSV.
-```sh
-python src/main.py
-```
-
-### 5. Load cleaned data into SQLite
-Creates or updates: data/sqlite/shipments.db
-```sh
-python src/database/load_to_sqlite.py
-```
-
-### 6. Run SQL analytic scripts
-Each script performs a focused analysis.
-```sh
-python src/sql_analysis/connections_and_overview.py
-python src/sql_analysis/holiday_analysis.py
-python src/sql_analysis/region_analysis.py
-python src/sql_analysis/trend_analysis.py
-```
-
-### 7. Generate visualizations (Optional)
-Outputs charts to the visuals/ folder:
-```sh
-python src/charts/visualize_trends.py
-```
