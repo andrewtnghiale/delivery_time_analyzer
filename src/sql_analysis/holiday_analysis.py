@@ -193,17 +193,17 @@ def holiday_vs_region_success(conn):
     SELECT
         origin_region,
         ROUND(
-            AVG(CASE WHEN holiday_period = 'Yes' THEN delivery_days END) -
-            AVG(CASE WHEN holiday_period = 'No' THEN delivery_days END),
+            COALESCE(AVG(CASE WHEN holiday_period = 'Yes' THEN delivery_days END), 0) -
+            COALESCE(AVG(CASE WHEN holiday_period = 'No' THEN delivery_days END), 0),
         2) AS delay_difference,
         ROUND(
             (
-                COUNT(CASE WHEN holiday_period='Yes' AND status='Delivered' THEN 1 END) * 100.0 /
-                COUNT(CASE WHEN holiday_period='Yes' THEN 1 END)
+                COALESCE(SUM(CASE WHEN holiday_period='Yes' AND status='Delivered' THEN 1 END), 0) * 100.0 /
+                NULLIF(SUM(CASE WHEN holiday_period='Yes' THEN 1 END), 0)
             ) -
             (
-                COUNT(CASE WHEN holiday_period='No' AND status='Delivered' THEN 1 END) * 100.0 /
-                COUNT(CASE WHEN holiday_period='No' THEN 1 END)
+                COALESCE(SUM(CASE WHEN holiday_period='No' AND status='Delivered' THEN 1 END), 0) * 100.0 /
+                NULLIF(SUM(CASE WHEN holiday_period='No' THEN 1 END), 0)
             ),
         2) AS success_rate_difference
     FROM shipments_cleaned

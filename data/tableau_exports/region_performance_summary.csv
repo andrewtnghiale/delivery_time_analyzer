@@ -1,4 +1,4 @@
-destination_region,total_shipments,delivered_shipments,in_transit_shipments,delivery_success_rate,"ROUND(AVG(delivery_days), 2)",min_delivery_days,max_delivery_days
+destination_region,total_shipments,delivered_shipments,in_transit_shipments,delivery_success_rate,avg_delivery_days,min_delivery_days,max_delivery_days
 South,534,467,67,87.45,3.54,1.0,10.0
 East,552,482,70,87.32,3.79,1.0,10.0
 West,550,478,72,86.91,3.76,1.0,10.0

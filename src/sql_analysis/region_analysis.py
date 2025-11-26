@@ -232,7 +232,7 @@ def region_performance_summary(conn):
         COUNT(CASE WHEN status = 'In Transit' THEN 1 END) AS in_transit_shipments,
         ROUND(COUNT(CASE WHEN status = 'Delivered' THEN 1 END) * 100.0 / COUNT(*), 2)
         AS delivery_success_rate,
-        ROUND(AVG(delivery_days), 2),
+        ROUND(AVG(delivery_days), 2) AS avg_delivery_days,
         MIN(delivery_days) AS min_delivery_days,
         MAX(delivery_days) AS max_delivery_days
     FROM shipments_cleaned

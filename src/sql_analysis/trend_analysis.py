@@ -26,12 +26,12 @@ def weekly_volume(conn):
     query = """
     SELECT
         destination_region,
-        strftime('%W', delivery_date) AS delivered_week_number,
+        strftime('%W', ship_date) AS week_number,
         COUNT(CASE WHEN status = 'Delivered' THEN 1 END) AS delivery_count,
         COUNT(CASE WHEN status = 'In Transit' THEN 1 END) AS in_transit_count
     FROM shipments_cleaned
-    GROUP BY destination_region, delivered_week_number
-    ORDER BY delivered_week_number ASC;
+    GROUP BY destination_region, week_number
+    ORDER BY week_number ASC;
     """
     df = pd.read_sql_query(query, conn)
     return df
