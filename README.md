@@ -47,7 +47,14 @@ This pipeline is designed with data realism in mind: the raw data contains inten
 Modular and Scalable
 - Each cleaning and analysis process is developed as a separate module under src/, making this project modular, testable, and extensible.
 
+## Quickstart 
+```md
+Run the entire pipeline with one command:
+```
 
+```sh
+python run_pipeline.py
+```
 
 ## How to Run
 
@@ -64,7 +71,7 @@ pip install -r requirements.txt
 ```
 
 ### 3. Generate mock shipment data
-This creates the raw file in: data/raw/shipments.csv
+This creates the raw file in: `data/raw/shipments.csv`
 ```sh
 python data_generation/generate_mock_data.py
 ```
@@ -76,7 +83,7 @@ python src/main.py
 ```
 
 ### 5. Load cleaned data into SQLite
-Creates or updates: data/sqlite/shipments.db
+Creates or updates: `data/sqlite/shipments.db`
 ```sh
 python src/database/load_to_sqlite.py
 ```
@@ -97,8 +104,9 @@ python src/charts/visualize_trends.py
 ```
 
 ## Interactive Tableau Dashboard
-This project includes an Tableau dashboard suite build from the cleaned ETL output and SQL analytics. It showcases the final stage of the pipeline, transforming processed shipment data into business insights.
+This project includes an interactive Tableau dashboard suite build from the cleaned ETL output and SQL analytics. It showcases the final stage of the pipeline, transforming processed shipment data into business insights.
 
+View the interactive dashboards:
 https://public.tableau.com/views/ShipmentsETLAnalyticswithQueries/OverallShipmentPerformance
 
 The Tableau dashboards visualize:
@@ -201,8 +209,20 @@ delivery_time_analyzer/
 └── README.md
 
 
-## Future Improve and Explorations
+## Future Improvements and Explorations
 This project was designed to be modular and extensible, allowing for ongoing development and scalability. Potential future enhancements include:
+- Command-line interface (CLI) execution
+  - Single entry point for running specific pipeline stages
+  - Commands such as:
+    - `python run_pipeline.py full`
+    - `python run_pipeline.py etl`
+    - `python run_pipeline.py sql`
+  - Improved usability and automation
+
 - Multiprocessing / multithreading ETL
   - parallel CSV cleaning and validation
   - Faster processing for large datasets
+
+- Automation and scheduling
+  - Scheduled pipeline runs
+  - Automatic Tableau extract refresh
