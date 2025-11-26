@@ -109,9 +109,6 @@ The Tableau dashboards visualize:
 - Weekly shipment trends and delivery duration patterns
 
 
-
-
-
 ## Project Structure
 
 delivery_time_analyzer/
@@ -202,3 +199,10 @@ delivery_time_analyzer/
 ├── .gitattributes
 
 └── README.md
+
+
+## Future Improve and Explorations
+This project was designed to be modular and extensible, allowing for ongoing development and scalability. Potential future enhancements include:
+- Multiprocessing / multithreading ETL
+  - parallel CSV cleaning and validation
+  - Faster processing for large datasets
