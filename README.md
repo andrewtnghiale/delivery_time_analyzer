@@ -33,24 +33,22 @@ This pipeline is designed with data realism in mind: the raw data contains inten
 ### Shipment Data Analytics
 **SQL modules produce insights including**:
 - **Overview and Status Metrics**  
-  Total shipments, delivered vs. in-transit counts, average delivery time, and delivery frequency distribution.
+  Total shipments, delivered vs. in-transit counts, average delivery time, and delivery frequency distribution
 
 - **Holiday Performance Analysis**  
-  Compare shipment performance during holiday vs. non-holiday periods; analyze regional holiday impact and delay gaps.
+  Compare shipment performance during holiday vs. non-holiday periods; analyze regional holiday impact and delay gaps
 
 - **Region-Based Insights**  
-  Shipment volumes by origin/destination, average delivery days per region and route, delivery success rates, bottleneck and fastest routes.
+  Shipment volumes by origin/destination, average delivery days per region and route, delivery success rates, bottleneck and fastest routes
 
 - **Trend and Time-Based Analysis**  
-  Weekly shipment volume trends, day-of-week performance, transit volume over time, and weekly delivery duration averages.
+  Weekly shipment volume trends, day-of-week performance, transit volume over time, and weekly delivery duration averages
 
 Modular and Scalable
-- Each cleaning and analysis process is developed as a separate module under src/, making this project modular, testable, and extensible.
+- Each cleaning and analysis process is developed as a separate module under src/, making this project modular, testable, and extensible
 
 ## Quickstart 
-```md
 Run the entire pipeline with one command:
-```
 
 ```sh
 python run_pipeline.py
@@ -62,7 +60,7 @@ python run_pipeline.py
 
 ```sh
 python -m venv venv
-.\venv\Scripts\activate      # Windows
+.\venv\Scripts\activate
 ```
 ### 2. Install dependencies
 
@@ -77,7 +75,7 @@ python data_generation/generate_mock_data.py
 ```
 
 ### 4. Run the full ETL pipeline
-This step loads raw data, cleans it, logs issues, and then outputs into a cleaned CSV.
+This loads raw data, cleans it, logs issues, and then outputs into a cleaned CSV
 ```sh
 python src/main.py
 ```
@@ -89,18 +87,12 @@ python src/database/load_to_sqlite.py
 ```
 
 ### 6. Run SQL analytic scripts
-Each script performs a focused analysis.
+Each script performs a focused analysis
 ```sh
 python src/sql_analysis/connections_and_overview.py
 python src/sql_analysis/holiday_analysis.py
 python src/sql_analysis/region_analysis.py
 python src/sql_analysis/trend_analysis.py
-```
-
-### 7. Generate visualizations (Optional)
-Outputs charts to the visuals/ folder:
-```sh
-python src/charts/visualize_trends.py
 ```
 
 ## Interactive Tableau Dashboard
@@ -133,12 +125,6 @@ delivery_time_analyzer/
 
 │       └── shipments.db    # SQLite database for analytics
 
-│
-
-├── visuals/                # Generated charts / exports (PNG, PDF, etc.)
-
-│
-
 ├── data_generation/
 
 │   └── generate_mock_data.py   # Synthetic shipment dataset generator
@@ -152,15 +138,7 @@ delivery_time_analyzer/
 
 │
 
-│   ├── charts/
-
-│   │   ├── visualize_trends.py
-
-│   │   └── __init__.py
-
-│
-
-│   ├── cleaning/               # Data cleaning modules (Transform step)
+│   ├── cleaning/               # Data cleaning modules
 
 │   │   ├── load_data.py
 
@@ -180,11 +158,11 @@ delivery_time_analyzer/
 
 │   ├── database/
 
-│   │   └── load_to_sqlite.py
+│   │   └── load_to_sqlite.py   # Loads cleaned data to SQLite
 
 │
 
-│   └── sql_analysis/
+│   └── sql_analysis/           # SQL analytical modules
 
 │       ├── connections_and_overview.py
 
@@ -212,17 +190,54 @@ delivery_time_analyzer/
 ## Future Improvements and Explorations
 This project was designed to be modular and extensible, allowing for ongoing development and scalability. Potential future enhancements include:
 - Command-line interface (CLI) execution
-  - Single entry point for running specific pipeline stages
+A single command line entry point for running specific stages of the pipeline
   - Commands such as:
     - `python run_pipeline.py full`
+      - Run the **entire end-to-end pipeline**: data generation, cleaning, load to SQLite, SQL analytics
     - `python run_pipeline.py etl`
+      - Execute only the **ETL pipeline**: loads raw data, cleans it, outputs cleaned CSVs, and loads them into SQLite
     - `python run_pipeline.py sql`
-  - Improved usability and automation
+      - Run only the **SQL analytics layer**, executing all query modules to generate metrics and analysis tables
+  - Provides improved usability, debugging and automation
 
 - Multiprocessing / multithreading ETL
-  - parallel CSV cleaning and validation
-  - Faster processing for large datasets
+Enhancing performance for larger datasets
+  - Parallel CSV cleaning and validation
+  - Concurrent transformations across multiple processor cores
+  - Achieves reduced overall ETL runtime
 
 - Automation and scheduling
+Automating long-term execution and data refresh cycles
   - Scheduled pipeline runs
-  - Automatic Tableau extract refresh
+  - Automatic Tableau extract refresh after each ETL cycle
+
+- Batch Tracking
+Improve traceability, rollback capability and auditing
+  - batch-id
+    - Unique identifier assigned to each ETL run
+    - Allow grouping all records loaded in the same batch
+    - Support rollback, prevents collisions, improves traceability
+  - load_dt
+    - Timestamp to indicate when each row was loaded into the database
+    - Useful for auditing, freshness checks, debugging pipeline timing issues
+  batch_record_id
+    - Unique key for an ETL batch stored in batch_log table
+    - Tracks batch start/end time, row counts, success/failure state
+    - Enables targetted rollback by removing all records tied to specific batch
+
+- Audit Logging Enhancements
+Expanding logging capabilities to improve traceability, debugging and data governance
+  - Pipeline run logs
+    - Capture ETL run start time, end time, row counts, success/failure states
+
+- Security Requirements and Data Protection
+Introduce guidelines and tooling to support secure data handling and user access practices
+  - Access control requirements
+    - Restrict who can run the ETL pipeline or modify the SQLite database.
+  - Data privacy and handling
+    - Ensure no sensitive data is written into logs
+    - Mask fields if integrating with real datasets in the future
+  - Pipeline execution safeguards
+    - Validate all input CSVs before processing to prevent malicious file injection
+  - Tool dependent security
+    - Control permissions for who can refresh or republish dashboards
