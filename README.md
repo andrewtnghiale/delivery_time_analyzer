@@ -217,7 +217,7 @@ A single command line entry point for running specific stages of the pipeline
   - load_dt
     - Timestamp to indicate when each row was loaded into the database
     - Useful for auditing, freshness checks, rollbacks, debugging pipeline timing issues
-  batch_record_id
+  - batch_record_id
     - Unique key for an ETL batch stored in batch_log table
     - Tracks batch start/end time, row counts, success/failure state
     - Enables targetted rollback by removing all records tied to specific batch
