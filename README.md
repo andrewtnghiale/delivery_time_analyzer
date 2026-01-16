@@ -128,34 +128,19 @@ A single command line entry point for running specific stages of the pipeline
   - Concurrent transformations across multiple processor cores
   - Achieves reduced overall ETL runtime
 
-- Automation and scheduling: Automating long-term execution and data refresh cycles
+- Automation and scheduling: Automating repeatable execution and data refresh cycles
   - Scheduled pipeline runs
   - Automatic Tableau extract refresh after each ETL cycle
 
 - Batch Tracking: Improve traceability, rollback capability and auditing
-  - batch-id
+  - batch_user_id
     - Unique identifier assigned to each ETL run
     - Allow grouping all records loaded in the same batch
     - Support rollback, prevents collisions, improves traceability
   - load_dt
     - Timestamp to indicate when each row was loaded into the database
-    - Useful for auditing, freshness checks, debugging pipeline timing issues
+    - Useful for auditing, freshness checks, rollbacks, debugging pipeline timing issues
   - batch_record_id
     - Unique key for an ETL batch stored in batch_log table
     - Tracks batch start/end time, row counts, success/failure state
     - Enables targetted rollback by removing all records tied to specific batch
-
-- Audit Logging Enhancements: Expanding logging capabilities to improve traceability, debugging and data governance
-  - Pipeline run logs
-    - Capture ETL run start time, end time, row counts, success/failure states
-
-- Security Requirements and Data Protection: Introduce guidelines and tooling to support secure data handling and user access practices
-  - Access control requirements
-    - Restrict who can run the ETL pipeline or modify the SQLite database.
-  - Data privacy and handling
-    - Ensure no sensitive data is written into logs
-    - Mask fields if integrating with real datasets in the future
-  - Pipeline execution safeguards
-    - Validate all input CSVs before processing to prevent malicious file injection
-  - Tool dependent security
-    - Control permissions for who can refresh or republish dashboards
