@@ -98,93 +98,16 @@ python src/sql_analysis/trend_analysis.py
 ## Interactive Tableau Dashboard
 This project includes an interactive Tableau dashboard suite build from the cleaned ETL output and SQL analytics. It showcases the final stage of the pipeline, transforming processed shipment data into business insights.
 
+<p align="center"> <img src="images/dashboard_overview.png" width="850"> </p> <p align="center"> <em>Figure 1: Overall shipment volume, delivery status distribution, and average delivery time KPIs.</em> </p>
+
+<p align="center"> <img src="images/regional_performance.png" width="850"> </p> <p align="center"> <em>Figure 2: Delivery success rates and bottleneck routes by region.</em> </p>
+
+<p align="center"> <img src="images/holiday_vs_nonholiday.png" width="850"> </p> <p align="center"> <em>Figure 3: Delivery delay comparison during holiday and non-holiday periods.</em> </p>
+
+<p align="center"> <img src="images/weekly_trends.png" width="850"> </p> <p align="center"> <em>Figure 4: Weekly shipment volume and delivery duration trends.</em> </p>
+
 View the interactive dashboards:
 https://public.tableau.com/views/ShipmentsETLAnalyticswithQueries/OverallShipmentPerformance
-
-The Tableau dashboards visualize:
-
-- Overall shipment volume and delivery performance
-- Regional delivery success rates and bottleneck routes
-- Holiday vs. non-holiday delivery delays and success gaps
-- Weekly shipment trends and delivery duration patterns
-
-
-## Project Structure
-
-delivery_time_analyzer/
-
-├── data/
-
-│   ├── raw/                # Unprocessed shipment CSVs
-
-│   ├── cleaned/            # Final cleaned CSV outputs
-
-│   ├── logs/               # Audit logs for data issues
-
-│   └── sqlite/
-
-│       └── shipments.db    # SQLite database for analytics
-
-├── data_generation/
-
-│   └── generate_mock_data.py   # Synthetic shipment dataset generator
-
-│
-
-├── src/
-
-
-│   ├── main.py                 # Main ETL pipeline runner
-
-│
-
-│   ├── cleaning/               # Data cleaning modules
-
-│   │   ├── load_data.py
-
-│   │   ├── ids_cleaning.py
-
-│   │   ├── date_cleaning.py
-
-│   │   ├── duration_cleaning.py
-
-│   │   ├── region_cleaning.py
-
-│   │   ├── save_data.py
-
-│   │   └── __init__.py
-
-│
-
-│   ├── database/
-
-│   │   └── load_to_sqlite.py   # Loads cleaned data to SQLite
-
-│
-
-│   └── sql_analysis/           # SQL analytical modules
-
-│       ├── connections_and_overview.py
-
-│       ├── holiday_analysis.py
-
-│       ├── region_analysis.py
-
-│       ├── trend_analysis.py
-
-│       └── __init__.py
-
-│
-
-├── tests/
-
-│
-
-├── .gitignore
-
-├── .gitattributes
-
-└── README.md
 
 
 ## Future Improvements and Explorations
