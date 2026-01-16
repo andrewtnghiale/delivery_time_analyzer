@@ -98,13 +98,13 @@ python src/sql_analysis/trend_analysis.py
 ## Interactive Tableau Dashboard
 This project includes an interactive Tableau dashboard suite build from the cleaned ETL output and SQL analytics. It showcases the final stage of the pipeline, transforming processed shipment data into business insights.
 
-<p align="center"> <img src="images/dashboard_overview.png" width="850"> </p> <p align="center"> <em>Figure 1: Overall shipment volume, delivery status distribution, and average delivery time KPIs.</em> </p>
+<p align="center"> <img src="images/dashboard_overview.png" width="650"> </p> <p align="center"> <em>Figure 1: Overall shipment volume, delivery status distribution, and average delivery time KPIs.</em> </p>
 
-<p align="center"> <img src="images/regional_performance.png" width="850"> </p> <p align="center"> <em>Figure 2: Delivery success rates and bottleneck routes by region.</em> </p>
+<p align="center"> <img src="images/regional_performance.png" width="650"> </p> <p align="center"> <em>Figure 2: Delivery success rates and bottleneck routes by region.</em> </p>
 
-<p align="center"> <img src="images/holiday_vs_nonholiday.png" width="850"> </p> <p align="center"> <em>Figure 3: Delivery delay comparison during holiday and non-holiday periods.</em> </p>
+<p align="center"> <img src="images/holiday_vs_nonholiday.png" width="650"> </p> <p align="center"> <em>Figure 3: Delivery delay comparison during holiday and non-holiday periods.</em> </p>
 
-<p align="center"> <img src="images/weekly_trends.png" width="850"> </p> <p align="center"> <em>Figure 4: Weekly shipment volume and delivery duration trends.</em> </p>
+<p align="center"> <img src="images/weekly_trends.png" width="650"> </p> <p align="center"> <em>Figure 4: Weekly shipment volume and delivery duration trends.</em> </p>
 
 View the interactive dashboards:
 https://public.tableau.com/views/ShipmentsETLAnalyticswithQueries/OverallShipmentPerformance
